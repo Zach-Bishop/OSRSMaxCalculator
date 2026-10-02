@@ -1,0 +1,1 @@
+This code will use the sold school runescape skills API to determine how close your account is to maxing their account
