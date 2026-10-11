@@ -67,8 +67,10 @@ def main():
     stat_dictionary = fetch_data(args.player_name)
     df = process_data(stat_dictionary)
     df.to_csv(f"{args.player_name}_stats.csv")
-    for skill in df.loc[df['Percent Finished'] < 100].index:
-        print(f"{skill}: {df.loc[skill, 'XP']} {df.loc[skill, 'Percent Finished']:.2f}%")
+    for skill in df.loc[df['Percent Finished'] < 100].sort_values('Percent Finished').index:
+        if skill != 'Total':
+            print(f"{skill}: {df.loc[skill, 'XP']} {df.loc[skill, 'Percent Finished']:.2f}%")
+    print(f"Total: {df.loc['Total', 'XP']} {df.loc['Total', 'Percent Finished']:.2f}%")
 
 if __name__ == '__main__':
     main()
